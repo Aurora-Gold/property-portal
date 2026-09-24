@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Property Portal — Project Specification</title>
+  <style>
+    :root { --ink:#172033; --muted:#64748b; --line:#e2e8f0; --brand:#2563eb; --soft:#eff6ff; --bg:#f8fafc; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--bg); font:16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .shell { display:grid; grid-template-columns:270px minmax(0, 1fr); max-width:1440px; margin:auto; }
+    aside { position:sticky; top:0; height:100vh; padding:32px 22px; background:#fff; border-right:1px solid var(--line); overflow:auto; }
+    .eyebrow { color:var(--brand); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    aside h2 { margin:8px 0 24px; font-size:19px; line-height:1.25; }
+    nav a { display:block; padding:7px 10px; color:var(--muted); border-radius:8px; text-decoration:none; font-size:14px; }
+    nav a:hover { color:var(--brand); background:var(--soft); }
+    main { min-width:0; padding:56px clamp(24px, 6vw, 96px) 90px; background:#fff; }
+    .hero { max-width:880px; padding-bottom:38px; border-bottom:1px solid var(--line); }
+    h1 { margin:8px 0 14px; font-size:clamp(34px, 5vw, 58px); line-height:1.05; letter-spacing:-.04em; }
+    h2 { margin:58px 0 16px; padding-top:10px; font-size:28px; line-height:1.2; letter-spacing:-.02em; border-top:1px solid var(--line); }
+    h3 { margin:28px 0 8px; font-size:19px; }
+    p { max-width:880px; }
+    .lede { color:var(--muted); font-size:19px; max-width:760px; }
+    .note { margin:22px 0; padding:15px 18px; background:var(--soft); border-left:4px solid var(--brand); border-radius:0 8px 8px 0; color:#1e3a8a; }
+    ul, ol { max-width:880px; padding-left:25px; }
+    li { margin:5px 0; }
+    code, pre { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    code { padding:2px 5px; color:#1e40af; background:#eef2ff; border-radius:4px; font-size:.9em; }
+    pre { max-width:880px; padding:18px; overflow:auto; color:#dbeafe; background:#0f172a; border-radius:10px; }
+    table { width:100%; max-width:980px; margin:16px 0 24px; border-collapse:collapse; font-size:14px; }
+    th, td { padding:12px 14px; text-align:left; vertical-align:top; border:1px solid var(--line); }
+    th { color:#334155; background:#f8fafc; font-weight:700; }
+    .tag { display:inline-block; margin:4px 5px 4px 0; padding:5px 10px; color:#1e40af; background:var(--soft); border-radius:999px; font-size:13px; }
+    .footer { margin-top:60px; padding-top:20px; color:var(--muted); border-top:1px solid var(--line); font-size:13px; }
+    @media (max-width:800px) { .shell { display:block; } aside { position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); } nav { display:flex; flex-wrap:wrap; gap:3px; } nav a { padding:5px 8px; } main { padding:34px 20px 60px; } h2 { margin-top:42px; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="eyebrow">Project specification</div>
+      <h2>Property Portal</h2>
+      <nav aria-label="Table of contents">
+        <a href="#purpose">1. Purpose</a><a href="#goals">2. Product goals</a><a href="#scope">3. Initial scope</a>
+        <a href="#users">4. Users &amp; permissions</a><a href="#journeys">5. User journeys</a><a href="#functional">6. Functional requirements</a>
+        <a href="#architecture">7. Technical architecture</a><a href="#data">8. Data model</a><a href="#api">9. API surface</a>
+        <a href="#seed">10. Sample data</a><a href="#quality">11. Quality &amp; security</a><a href="#delivery">12. Delivery phases</a><a href="#done">13. Definition of done</a>
+      </nav>
+    </aside>
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Web first · Mobile later · Myanmar</div>
+        <h1>Property Portal</h1>
+        <p class="lede">A property marketplace for buying, selling, and renting real estate, launching in Yangon and Mandalay with a location model ready for future expansion.</p>
+        <div class="note"><strong>Review status:</strong> This is a product and technical specification only. It intentionally contains no implementation.</div>
+      </section>
+
+      <section id="purpose"><h2>1. Purpose</h2><p>Build a web-first property marketplace for Myanmar. The first release supports Yangon and Mandalay, their townships, and neighborhoods. A mobile application follows after the web experience and API are stable.</p></section>
+      <section id="goals"><h2>2. Product goals</h2><ul><li>Help visitors discover properties by transaction type, location, category, price, and features.</li><li>Let owners and agents publish and manage listings.</li><li>Let buyers and renters save, compare, and enquire about properties.</li><li>Provide moderation and operations tools for admins and staff.</li><li>Share a TypeScript API/domain contract across web and mobile.</li><li>Launch with substantial realistic sample data for Yangon and Mandalay.</li></ul></section>
+      <section id="scope"><h2>3. Initial scope</h2><h3>Transaction types</h3><span class="tag">Buy</span><span class="tag">Sell</span><span class="tag">Rent</span><p>Seller-side workflows use “Sell”; public seller listings are discoverable under the Buy marketplace.</p><h3>Property categories</h3><p><span class="tag">Land</span><span class="tag">Apartment / condominium</span><span class="tag">House</span><span class="tag">Condo unit</span><span class="tag">Commercial</span><span class="tag">Office</span><span class="tag">Shop / retail</span><span class="tag">Warehouse</span><span class="tag">Industrial</span><span class="tag">Room / shared accommodation</span><span class="tag">Other</span></p><p>Categories are data-driven. Category-specific attributes must be extensible without changing the core listing model.</p><h3>Locations</h3><p>Use a hierarchical location model: city → township → optional ward/neighborhood. Listings reference a location ID. Seed Yangon and Mandalay first; future cities must not require schema redesign.</p></section>
+      <section id="users"><h2>4. Users and permissions</h2><table><thead><tr><th>Role</th><th>Capabilities</th></tr></thead><tbody><tr><td>Visitor</td><td>Browse, search, filter, view public details, and submit enquiries.</td></tr><tr><td>Buyer / renter</td><td>Visitor actions plus profile, saved listings, saved searches, enquiry history, and viewing requests.</td></tr><tr><td>Owner</td><td>Create/manage own listings, upload media, receive/respond to enquiries, and view performance.</td></tr><tr><td>Agent</td><td>Manage assigned/owned listings, agency profile, enquiries, and optional owner collaboration.</td></tr><tr><td>Staff</td><td>Moderation and operational workflows within assigned permissions.</td></tr><tr><td>Admin</td><td>Full administration, roles, taxonomy, locations, audit access, and staff permissions.</td></tr></tbody></table><p>Roles are additive. A user may have multiple roles. All access checks are enforced server-side.</p></section>
+      <section id="journeys"><h2>5. Core user journeys</h2><ol><li>Search for an apartment for rent in Yangon, refine results, inspect a listing, and contact the owner/agent.</li><li>Save and compare listings.</li><li>Create a listing as draft, add photos/location, submit for review, and publish after approval.</li><li>Manage multiple agent listings and respond to enquiries.</li><li>Review, change-request, or reject submitted listings with a moderation reason.</li><li>Add future locations, update categories, manage staff permissions, and audit admin changes.</li></ol></section>
+      <section id="functional"><h2>6. Functional requirements</h2><h3>Discovery</h3><ul><li>Responsive list/grid search with map-ready location data.</li><li>Filters for transaction, category, city, township, prices, bedrooms, bathrooms, areas, furnishing, parking, amenities, status, and date posted.</li><li>Sort by relevance, newest, price, and area.</li><li>URL-addressable search state, pagination/cursors, and clear loading/error/empty states.</li><li>Listing details include gallery, price, location, attributes, description, amenities, contact CTA, owner/agent, verification, related listings, and report action.</li></ul><h3>Listing management</h3><p>Lifecycle: <code>draft</code> → <code>submitted</code> → <code>changes_requested</code> / <code>approved_published</code> → <code>paused</code> / <code>sold_rented</code> / <code>archived</code>. Support category-dependent required fields, ordered media, cover image, captions, public slugs, verification, and private moderation history.</p><h3>Engagement and administration</h3><ul><li>Saved listings, saved searches, enquiries, viewing requests, notification records, and abuse reports.</li><li>Moderation queue, users, roles, agencies, categories, amenities, locations, audits, and dashboard metrics.</li></ul></section>
+      <section id="architecture"><h2>7. Technical architecture</h2><p>The projects are three sibling repositories:</p><pre>property-portal/
+  api/      # Express API, Prisma, SQLite
+  app/      # React web application, shadcn/ui
+  mobile/   # React Native + Expo application (later phase)</pre><p>Each repository owns its package/configuration/tests/README/Git history. Shared types are published or generated as a versioned package or API contract.</p><h3>API</h3><p>TypeScript, Node.js, Express, Prisma 7, and SQLite initially. REST JSON under <code>/api/v1</code>. Use validation, policies, services, repositories, structured logs, request IDs, rate limits, secure CORS, OpenAPI, access/refresh-token auth, and replaceable media storage.</p><h3>Web</h3><p>TypeScript + React with shadcn/ui preset <code>b7CNFsdU</code>. Provide accessible responsive UI, typed API client, server-state caching, route authorization, and Myanmar-aware MMK/metric formatting with Burmese/English-ready content.</p><h3>Mobile</h3><p>React Native + Expo + TypeScript. Consume the same API; prioritize discovery, listing details, saves, enquiries, notifications, and listing management.</p></section>
+      <section id="data"><h2>8. Logical data model</h2><p><code>User</code>, <code>Role</code>, <code>Permission</code>, <code>UserRole</code>, <code>Profile</code>, <code>Agency</code>, <code>AgencyMember</code>, <code>Location</code>, <code>PropertyCategory</code>, <code>Amenity</code>, <code>Listing</code>, <code>ListingAmenity</code>, <code>ListingAttribute</code>, <code>ListingMedia</code>, <code>SavedListing</code>, <code>SavedSearch</code>, <code>Enquiry</code>, <code>ViewingRequest</code>, <code>ModerationReview</code>, <code>Report</code>, <code>AuditLog</code>, and <code>Notification</code>.</p><p>Listings include title, slug, description, transaction/category, status, owner/agent, location, price/currency, negotiability, bedrooms, bathrooms, areas/units, furnishing, parking, contact visibility, publication timestamps, and verification metadata. Use decimal-safe money/area storage, indexes, opaque IDs, timestamps, archive/soft-delete semantics, and avoid SQLite-only assumptions that block PostgreSQL migration.</p></section>
+      <section id="api"><h2>9. Initial API surface</h2><ul><li>Auth: <code>/auth/register</code>, <code>/auth/login</code>, <code>/auth/refresh</code>, <code>/auth/logout</code>, <code>/me</code></li><li>Listings: list/create/detail/update/submit/pause endpoints</li><li>Engagement: save/unsave, saved searches, enquiries, viewing requests</li><li>Reference data: locations, categories, amenities</li><li>Dashboards: owner/agent listings and enquiries</li><li>Administration: moderation, users, taxonomy, locations, reports, audits</li></ul><p>Pagination, filtering, sorting, validation, authentication, and authorization errors must have one documented response format.</p></section>
+      <section id="seed"><h2>10. Sample data and seed requirements</h2><ul><li>Development-only accounts for every role.</li><li>At least 100 realistic listings across Yangon/Mandalay, major categories, and buy/rent transactions.</li><li>Varied prices, areas, rooms, amenities, statuses, owners, agents, agencies, media placeholders, saves, enquiries, and moderation records.</li><li>Township/neighborhood hierarchy that exercises filters and sorting.</li><li>Repeatable, idempotent seed script with no real personal data, credentials, or production secrets.</li></ul></section>
+      <section id="quality"><h2>11. Quality, security, and accessibility</h2><ul><li>Strict TypeScript, lint/format checks, and CI.</li><li>Unit tests for domain/policies; API integration tests for auth, lifecycle, filters, and role boundaries; web E2E tests for primary journeys.</li><li>WCAG 2.1 AA-oriented keyboard access, labels, focus, contrast, and non-color status cues.</li><li>Input validation/sanitization, auth/contact rate limiting, safe upload MIME/size limits, IDOR protection, and secret management.</li><li>Reproducible migrations/seeds, health checks, error/latency/auth/moderation monitoring, and backups.</li></ul></section>
+      <section id="delivery"><h2>12. Delivery phases</h2><table><thead><tr><th>Phase</th><th>Scope</th></tr></thead><tbody><tr><td>0 — Foundation</td><td>Repositories, environments, API contract, Prisma schema, design tokens, auth, seeds, CI.</td></tr><tr><td>1 — Web MVP</td><td>Discovery, details, auth, listing workflow, saves, enquiries, moderation, admin basics, sample data.</td></tr><tr><td>1.5 — Hardening</td><td>Accessibility, search performance, audits, abuse reports, media adapter, OpenAPI, observability, deployment readiness.</td></tr><tr><td>2 — Mobile</td><td>Expo app for priority discovery, saves, enquiries, notifications, and listing management.</td></tr><tr><td>3 — Expansion</td><td>More cities, maps, verified agencies, analytics, communications, multilingual content, and eventual PostgreSQL migration.</td></tr></tbody></table></section>
+      <section id="done"><h2>13. Definition of done for web MVP</h2><ul><li>Visitors can find and inspect buy/rent listings in Yangon and Mandalay.</li><li>Role-based actions and records are correctly isolated.</li><li>Owners/agents can submit listings through moderation to publication.</li><li>Buyers/renters can save listings and send enquiries.</li><li>Staff can moderate with recorded reasons; admins can manage locations/categories.</li><li>Seed data covers filters, roles, statuses, and workflows.</li><li>Automated checks pass and primary journeys work at desktop and narrow viewport sizes.</li></ul></section>
+      <div class="footer">Property Portal specification · Review version · Derived from <code>SPEC.md</code></div>
+    </main>
+  </div>
+</body>
+</html>

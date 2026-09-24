@@ -1,0 +1,25 @@
+.DS_Store
+Thumbs.db
+
+# Local/editor files
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+
+# Generated dependencies and build output
+**/node_modules/
+**/dist/
+**/.expo/
+**/.expo-shared/
+
+# Local runtime artifacts
+**/*.log
+api/*.db
+api/*.db-journal
+api/*.db-shm
+api/*.db-wal
+
+# TypeScript incremental output
+**/*.tsbuildinfo
