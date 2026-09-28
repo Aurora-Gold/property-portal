@@ -1,0 +1,12 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/Aurora-Gold/property-api.git
+	branch = feature/theme-toggle
+[submodule "app"]
+	path = app
+	url = https://github.com/Aurora-Gold/property-app.git
+	branch = main
+[submodule "mobile"]
+	path = mobile
+	url = https://github.com/Aurora-Gold/property-mobile.git
+	branch = master
